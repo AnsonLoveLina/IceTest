@@ -11,6 +11,7 @@ import org.ice4j.TransportAddress;
 import org.ice4j.ice.*;
 import org.ice4j.ice.sdp.CandidateAttribute;
 import org.ice4j.ice.sdp.IceSdpUtils;
+import org.opentelecoms.javax.sdp.NistSdpFactory;
 
 import javax.sdp.*;
 import java.util.StringTokenizer;
@@ -44,7 +45,7 @@ public class SdpUtils
      */
     public static String createSDPDescription(Agent agent) throws Throwable
     {
-        SdpFactory factory = SdpFactory.getInstance();
+        SdpFactory factory = new NistSdpFactory();
         SessionDescription sdess = factory.createSessionDescription();
 
         IceSdpUtils.initSessionDescription(sdess, agent);
@@ -66,7 +67,7 @@ public class SdpUtils
     public static void parseSDP(Agent localAgent, String sdp)
         throws Exception
     {
-        SdpFactory factory = SdpFactory.getInstance();
+        SdpFactory factory = new NistSdpFactory();
         SessionDescription sdess = factory.createSessionDescription(sdp);
 
         for(IceMediaStream stream : localAgent.getStreams())

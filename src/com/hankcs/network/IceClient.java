@@ -1,5 +1,15 @@
 package com.hankcs.network;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.ice4j.Transport;
+import org.ice4j.TransportAddress;
+import org.ice4j.ice.*;
+import org.ice4j.ice.harvest.StunCandidateHarvester;
+import org.ice4j.ice.harvest.TurnCandidateHarvester;
+import org.ice4j.security.LongTermCredential;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -7,21 +17,6 @@ import java.io.InputStreamReader;
 import java.net.DatagramSocket;
 import java.net.SocketAddress;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
-import org.ice4j.Transport;
-import org.ice4j.TransportAddress;
-import org.ice4j.ice.Agent;
-import org.ice4j.ice.Component;
-import org.ice4j.ice.IceMediaStream;
-import org.ice4j.ice.IceProcessingState;
-import org.ice4j.ice.LocalCandidate;
-import org.ice4j.ice.NominationStrategy;
-import org.ice4j.ice.RemoteCandidate;
-import org.ice4j.ice.harvest.StunCandidateHarvester;
-import org.ice4j.ice.harvest.TurnCandidateHarvester;
-import org.ice4j.security.LongTermCredential;
 
 public class IceClient
 {
@@ -36,17 +31,17 @@ public class IceClient
 
     private String remoteSdp;
 
-    private String[] turnServers = new String[]{"180.160.188.246:3478"};
+    private String[] turnServers = new String[]{"stun.jitsi.net:3478"};
 
-    private String[] stunServers = new String[]{"180.160.188.246:3478"};
+    private String[] stunServers = new String[]{"stun.stunprotocol.org:3478"};
 
-    private String username = "u1";
+    private String username = "guest";
 
-    private String password = "p1";
+    private String password = "anonymouspower!!";
 
     private IceProcessingListener listener;
 
-    static Logger log = Logger.getLogger(IceClient.class);
+    static Logger log = LogManager.getLogger(IceClient.class);
 
     public IceClient(int port, String streamName)
     {
